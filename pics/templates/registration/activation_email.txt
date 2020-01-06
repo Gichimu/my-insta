@@ -2,7 +2,7 @@ Welcome {{user}}
 
 Thank you for registering to our site.
 
-Please click the link below within {{expiration_days}} to complete your registration.
+Please click the link below within {{expiration_days}} days to complete your registration.
 
 {{activation_key}}
 
