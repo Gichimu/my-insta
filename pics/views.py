@@ -15,12 +15,13 @@ def profile(request):
     else:
         form = editForm()
 
-    # try:
-    #     posts = Profile.objects.all()
-    # except Profile.DoesNotExist:
-    #     posts = None
+    try:
+        current_user = request.user
+        profile = Profile.objects.filter(id=current_user.id)
+    except Profile.DoesNotExist:
+        profile = None
 
-    return render(request, 'profile.html', {'form': form})
+    return render(request, 'profile.html', {'form': form, 'profile': profile})
 
 
 
