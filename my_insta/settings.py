@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pics',
+    'pyuploadcare.dj',
     'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'my_insta.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,6 +130,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+LOGIN_REDIRECT_URL = 'welcome'
 
 MEDIA_URL = '/media/'
 
@@ -142,3 +144,10 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+# uploadcare config
+
+UPLOADCARE = {
+    'pub_key': '6c5cb955135f08ac1634',
+    'secret': '8ce69bf608ef728c9229'
+}

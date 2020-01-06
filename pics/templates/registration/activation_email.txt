@@ -4,5 +4,7 @@ Thank you for registering to our site.
 
 Please click the link below within {{expiration_days}} days to complete your registration.
 
-{{activation_key}}
+
+
+<a href="{{activation_key}}">activation link</a>
 

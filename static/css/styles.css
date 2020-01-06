@@ -3,3 +3,34 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.login {
+    margin-top: 5%;
+}
+
+.profile {
+    margin-top: 1%;
+}
+
+.follows {
+    border-left: 1px solid rgb(226, 221, 221);
+}
+
+.profile-pic {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0 auto;
+}
+
+.gallery {
+    max-width: 350px;
+    max-height: 250px;
+    margin: 5px;
+}
+
+.pics {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
