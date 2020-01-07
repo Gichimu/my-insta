@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'my_insta.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta',
+        'NAME': 'gram',
         'USER': 'moringa',
         'PASSWORD': '1234',
     }
@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-LOGIN_REDIRECT_URL = 'welcome'
+LOGIN_REDIRECT_URL = 'profile'
 
 MEDIA_URL = '/media/'
 
