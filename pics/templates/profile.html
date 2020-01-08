@@ -1,78 +1,88 @@
-{% extends 'base.html' %}
-{%load bootstrap4%}
-{%load static%}
-
-{% block content %}
-    <div class="container profile">
-        <div class="row">
-            {%if profile%}
-            <div class="col-md-4 prof">
-                <img src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png" class="img-responsive img-thumbnail profile-pic" alt="prof">
-            </div>
-            <div class="col-md-8">
-                <div class="row text-center">
-                    <p>{{username}}</p>
-                    <button class="btn btn-outline-inverse" data-toggle="modal" data-target="#editProfileModal">Edit profile</button>
-                </div>
-                <div class="row text-center">
-                    <p>12 posts</p>
-                    <p>2 followers</p>
-                    <p>3 following</p>
-                </div>
-                <div class="row text-center">
-                    <p><small>{{username}}</small></p>
-                </div>
-            </div>
-            {%else%}
-            <div class="col-md-4 prof">
-                <img src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png" class="img-responsive img-thumbnail profile-pic" alt="prof">
-            </div>
-            <div class="col-md-8">
-                <div class="row text-center">
-                    <p>{{username}}</p>
-                    <button class="btn btn-outline-default" data-toggle="modal" data-target="#editProfileModal">Edit profile</button>
-                </div>
-                <div class="row text-center">
-                    <p>12 posts</p>
-                    <p>2 followers</p>
-                    <p>3 following</p>
-                </div>
-                <div class="row text-center">
-                    <p><small>Name</small></p>
-                </div>
-            </div>
-            {%endif%}
-        </div>
-        <hr>
-        <div class="row pics">
-            <img src="{%static 'img/rand1.jpg'%}" class="img-thumbnail gallery" alt="">
-            <img src="{%static 'img/rand2.jpg'%}" class="img-thumbnail gallery" alt="">
-            <img src="{%static 'img/rand3.jpeg'%}" class="img-thumbnail gallery" alt="">
-            <img src="{%static 'img/rand4.jpg'%}" class="img-thumbnail gallery" alt="">
-            <img src="{%static 'img/rand5.jpg'%}" class="img-thumbnail gallery" alt="">
-        </div>
+{% extends 'base.html' %} {%load bootstrap4%} {%load static%}
+{% block content%}
+<div class="container profile">
+  <div class="row">
+    {%if profile%}
+    <div class="col-md-4 prof">
+      <img src="{{ profile.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
+        class="img-responsive img-thumbnail profile-pic" alt="prof" />
     </div>
-
-    <!-- Edit Profile Modal -->
-    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="profile/edit" method="post">
-                        {% csrf_token %}
-                        
-                        {% bootstrap_form form %}
-                        <button class="btn btn-outline-success btn-sm" value="Save">Save</button>
-                    </form>
-                </div>
-            
-            </div>
-        </div>
+    <div class="col-md-8">
+      <div class="row text-center">
+        <p>{{username}}</p>
+        <button class="btn btn-outline-inverse" data-toggle="modal" data-target="#editProfileModal">
+          Edit profile
+        </button>
+      </div>
+      <div class="row text-center">
+        <p>12 posts</p>
+        <p>2 followers</p>
+        <p>3 following</p>
+      </div>
+      <div class="row text-center">
+        <p><small>{{ profile.bio }}</small></p>
+      </div>
     </div>
+    {%else%}
+    <div class="col-md-4 prof">
+      <img src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png"
+        class="img-responsive img-thumbnail profile-pic" alt="prof" />
+    </div>
+    <div class="col-md-8">
+      <div class="row text-center">
+        <p>{{username}}</p>
+        <button class="btn btn-outline-default" data-toggle="modal" data-target="#editProfileModal">
+          Edit profile
+        </button>
+      </div>
+      <div class="row text-center">
+        <p>12 posts</p>
+        <p>2 followers</p>
+        <p>3 following</p>
+      </div>
+      <div class="row text-center">
+        <p><small>Name</small></p>
+      </div>
+    </div>
+    {%endif%}
+  </div>
+  <hr />
+  <div class="row pics">
+    {%if posts%}
+
+    {%else%}
+    <p class="text-center">You have no posts</p>
+
+    {%endif%}
+    <!-- <img src="{%static 'img/rand1.jpg'%}" class="img-thumbnail gallery" alt="" />
+    <img src="{%static 'img/rand2.jpg'%}" class="img-thumbnail gallery" alt="" />
+    <img src="{%static 'img/rand3.jpeg'%}" class="img-thumbnail gallery" alt="" />
+    <img src="{%static 'img/rand4.jpg'%}" class="img-thumbnail gallery" alt="" />
+    <img src="{%static 'img/rand5.jpg'%}" class="img-thumbnail gallery" alt="" /> -->
+    <a href="" class="btn btn-outline-success btn-sm">Create posts</a>
+  </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="profile/edit" method="post">
+          {% csrf_token %} {% bootstrap_form form %}
+          <button class="btn btn-outline-success btn-sm" value="Save">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {%endblock%}
