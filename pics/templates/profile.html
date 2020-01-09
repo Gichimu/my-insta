@@ -10,9 +10,12 @@
     <div class="col-md-8">
       <div class="row text-center">
         <p>{{username}}</p>
+        {%if user.is_authenticated%}
         <button class="btn btn-outline-inverse" data-toggle="modal" data-target="#editProfileModal">
           Edit profile
         </button>
+        {%else%}
+        {%endif%}
       </div>
       <div class="row text-center">
         <p>12 posts</p>
@@ -48,19 +51,50 @@
   </div>
   <hr />
   <div class="row pics">
-    {%if posts%}
-
-    {%else%}
+    {%for post in posts%}
+    <a href="#{{post.image_name}}" data-toggle="modal"><img class="img-fluid img-thumbnail gallery" src="{{ post.image.cdn_url }}" alt=""></a>
+                            
+    <!-- Modal -->
+    <div class="modal fade" id="{{post.image_name}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-body">
+                <img class="modal-image img-responsive" src="{{post.image.cdn_url}}" alt="">
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <i class="fas fa-map-marker-alt"></i> {{image.description}}
+                        </div>
+                        <div class="col">
+                            <i class="fas fa-stopwatch"></i> {{image.timestamp}}
+                        </div>
+                        <div class="col float-right">
+                        22 <i class="far fa-thumbs-up"></i> | 
+                            <i class="far fa-thumbs-down"></i> 9
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% empty %}
     <p class="text-center">You have no posts</p>
 
-    {%endif%}
-    <!-- <img src="{%static 'img/rand1.jpg'%}" class="img-thumbnail gallery" alt="" />
-    <img src="{%static 'img/rand2.jpg'%}" class="img-thumbnail gallery" alt="" />
-    <img src="{%static 'img/rand3.jpeg'%}" class="img-thumbnail gallery" alt="" />
-    <img src="{%static 'img/rand4.jpg'%}" class="img-thumbnail gallery" alt="" />
-    <img src="{%static 'img/rand5.jpg'%}" class="img-thumbnail gallery" alt="" /> -->
-    <a href="" class="btn btn-outline-success btn-sm">Create posts</a>
+    {%endfor%}
+    
+    
   </div>
+  {%if user.is_authenticated%}
+  <hr>
+  <div class="row">
+      <button class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#createModal">Create posts</button>
+  </div>
+  {%else%}
+  {%endif%}
 </div>
 
 <!-- Edit Profile Modal -->
@@ -75,13 +109,31 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="profile/edit" method="post">
+        <form action="edit/profile" method="post">
           {% csrf_token %} {% bootstrap_form form %}
           <button class="btn btn-outline-success btn-sm" value="Save">
             Save
           </button>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- add posts Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <form action="create/post" method="post">
+          {% csrf_token %}
+          {% bootstrap_form create_form %}
+          <button class="btn btn-outline-success btn-sm" value="Save">Save</button>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>
