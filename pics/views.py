@@ -52,7 +52,7 @@ def create_post(request):
         post.profile_user = request.user
         post.save()
         print("post has been created")
-    return redirect('profile')
+    return redirect('profile', user_id = request.user.id)
 
 
 def update_profile(request):
@@ -68,7 +68,7 @@ def update_profile(request):
             profile = form.save(commit = False)
             profile.user = request.user
             profile.save()
-            return redirect('profile')
+            return redirect('profile', user_id = request.user.id)
 
 
 def get_profile(request, user_id):

@@ -5,9 +5,9 @@ from . import views
 
 urlpatterns= [
     url('^$', views.welcome, name = 'welcome'),
-    url(r'^profile/(\d+)', views.profile, name = 'profile'),
-    url(r'^profile/edit/profile', views.update_profile, name = 'update_profile'),
-    url(r'^profile/create/post', views.create_post, name = 'create_posts'),
+    url(r'^profile/(?P<user_id>\d+)', views.profile, name = 'profile'),
+    url(r'^edit/profile', views.update_profile, name = 'update_profile'),
+    url(r'^create/post', views.create_post, name = 'create_posts'),
     url(r'^get_profile/(\d+)', views.get_profile, name='get_profile')
 ]
 
