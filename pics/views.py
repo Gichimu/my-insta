@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user, get_user_model
 from django.contrib.auth.models import User
 from .models import Profile, Image
-from .forms import editForm, createForm
+from .forms import editForm, createForm, commentForm
 
 def welcome(request):
    
@@ -30,6 +30,7 @@ def profile(request, user_id):
     username = user.get_username()
     form = editForm()
     create_form = createForm()
+    comment_form = commentForm()
     # if request.method == "POST":
     #     form = editForm(request.POST, request.FILES)
     #     create_form = createForm(request.POST, request.FILES)
@@ -52,7 +53,7 @@ def profile(request, user_id):
     except Profile.DoesNotExist:
         profile = None
 
-    return render(request, 'profile.html', {'form': form, 'posts': posts, 'create_form': create_form, 'profile': profile, 'username': username, 'user': user})
+    return render(request, 'profile.html', {'form': form, 'posts': posts, 'comment_form': comment_form, 'create_form': create_form, 'profile': profile, 'username': username, 'user': user})
 
 
 def create_post(request):
@@ -111,6 +112,15 @@ def search(request):
 
 
     return render(request, 'search.html', {'search_term': search_term, 'posts':posts})
+
+
+def comment(request, image_id):
+    form = commentForm(request.POST)
+    if form.is_valid:
+        comment = form.save(commit = False)
+        # form.image = 
+        
+    return redirect('profile', user_id = request.user.id)
 
     
 

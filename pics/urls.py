@@ -10,6 +10,7 @@ urlpatterns= [
     url(r'^create/post', views.create_post, name = 'create_posts'),
     url(r'^get_profile/(\d+)', views.get_profile, name='get_profile'),
     url(r'^search', views.search, name = 'search'),
+    url(r'^create/comment/(\d+)', views.comment, name = 'comment')
 ]
 
 if settings.DEBUG:
