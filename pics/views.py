@@ -17,7 +17,7 @@ def profile(request, user_id):
     posts = Image.objects.filter(profile_user_id = user_id)
     
     # username = user.get_username
-    # username = user.get_username()
+    username = user.get_username()
     form = editForm()
     create_form = createForm()
     # if request.method == "POST":
@@ -36,7 +36,6 @@ def profile(request, user_id):
     #     create_form = createForm()
 
     try:
-        current_user = request.user
         u = User.objects.get(id = user_id)
         profile = u.profile
         username = u.username
