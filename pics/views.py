@@ -9,13 +9,23 @@ from .forms import editForm, createForm
 def welcome(request):
    
     posts = Image.objects.all()
-    
+    for post in posts:
+        name = post.image_name.split()
+        if len(name) > 1:
+            post.image_name = '_'.join(name)
+        else:
+            pass
     return render(request, 'welcome.html', {'posts': posts})
 
 def profile(request, user_id):
     user = request.user
     posts = Image.objects.filter(profile_user_id = user_id)
-    
+    for post in posts:
+        name = post.image_name.split()
+        if len(name) > 1:
+            post.image_name = '_'.join(name)
+        else:
+            pass
     # username = user.get_username
     username = user.get_username()
     form = editForm()
@@ -85,6 +95,22 @@ def get_profile(request, user_id):
         profile = None
     
     return render(request, 'profile.html', {'form': form, 'posts': posts, 'create_form': create_form, 'profile': profile, 'username': username, 'user': user})
+
+
+def search(request):
+    search_term = request.POST['search']
+    # term = search_term.split()
+    # if len(term) > 1:
+    #     new_term = '_'.join(term)
+    # else:
+    #     new_term = search_term
+    try:
+        posts = Image.objects.filter(image_name = search_term)
+    except DoesNotExist:
+        posts = None
+
+
+    return render(request, 'search.html', {'search_term': search_term, 'posts':posts})
 
     
 

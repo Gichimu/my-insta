@@ -1,0 +1,50 @@
+{% extends 'base.html' %} 
+{%load bootstrap4%} {% load static %}
+{% block content%}
+    {%for post in posts%}
+        <div class="card-body">
+            <a href="#{{post.image_name}}" data-toggle="modal"><img class="img-fluid img-thumbnail gallery" src="{{ post.image.cdn_url }}" alt=""></a>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="{{post.image_name}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="profile/{{post.profile_user_id}}"><b>{{post.profile_user}}</b></a>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <img class="modal-image" src="{{post.image.cdn_url}}" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <i class="fas fa-map-marker-alt"></i> {{image.description}}
+                                </div>
+                                <div class="col">
+                                    <i class="fas fa-stopwatch"></i> {{image.timestamp}}
+                                </div>
+                                <div class="col float-right">
+                                22 <i class="far fa-thumbs-up"></i> | 
+                                    <i class="far fa-thumbs-down"></i> 9
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+    {%empty%}
+    <div class="container">
+        <div class="alert alert-warning text-center">
+            <h4>Message</h4>
+            <hr>
+            <p>0 posts not found for search term : <b><u>{{search_term}}</u></b>.</p>
+            <p>Please try another search term.</p>
+        </div>
+    </div>
+    {%endfor%}
+{%endblock%}

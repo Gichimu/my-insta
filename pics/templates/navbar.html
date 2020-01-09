@@ -9,14 +9,35 @@
             </button>
             <div class="collapse navbar-collapse nav" id="navbarContent">
                 <a href="/" class="navbar-brand">My Insta</a>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="form-inline" action="/search" method="post">
+                    {%csrf_token%}
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" aria-label="Search">
                 </form>
                 {%if user.is_authenticated %}
-                <a href="/profile/{{user.id}}" class="btn btn-outline-default btn-sm">Profile</a>
-                <a href="/logout" class="btn btn-outline-default btn-sm">logout</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile/{{user.id}}">Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">logout</a>
+                    </div>
+                </li>
+                <!-- <a href="" class="btn btn-outline-default btn-sm">Profile</a>
+                <a href="" class="btn btn-outline-default btn-sm">logout</a> -->
                 {%else%}
-                <a href="/accounts/login" class="btn btn-outline-default btn-sm">Sign in</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/accounts/login">Sign in</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/accounts/register">sign up</a>
+                    </div>
+                </li>
+                <!-- <a href="/accounts/login" class="btn btn-outline-default btn-sm">Sign in</a> -->
                 {%endif%}
 
             </div>

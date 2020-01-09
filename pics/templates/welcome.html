@@ -4,10 +4,13 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        
+        <div class="content gallery-content">
             {% for post in posts %}
-            <a href="#{{post.image_name}}" data-toggle="modal"><img class="img-fluid img-thumbnail gallery" src="{{ post.image.cdn_url }}" alt=""></a>
-                            
+            <div class="card gallery-card">
+                <div class="card-body">
+                    <a href="#{{post.image_name}}" data-toggle="modal"><img class="img-fluid img-thumbnail gallery" src="{{ post.image.cdn_url }}" alt=""></a>
+                </div>
+            </div>     
             <!-- Modal -->
             <div class="modal fade" id="{{post.image_name}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -25,10 +28,10 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
-                                        <i class="fas fa-map-marker-alt"></i> {{image.description}}
+                                            {{post.image_name}}
                                     </div>
                                     <div class="col">
-                                        <i class="fas fa-stopwatch"></i> {{image.timestamp}}
+                                        <a href=""><i class="far fa-comments"></i></a>
                                     </div>
                                     <div class="col float-right">
                                     22 <i class="far fa-thumbs-up"></i> | 
@@ -42,10 +45,12 @@
                 </div>
             {% empty %}
                 <div class="row">
+                    <div class="alert alert-warning">
                     <h2 class="text-center">There are no images to display</h2>
+                    </div>
                 </div>
             {%endfor%}
-        
+        </div>
     </div>
 </div>
 {% endblock %}
