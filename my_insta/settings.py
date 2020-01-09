@@ -110,7 +110,7 @@ DATABASES['default'].update(db_from_env)
 #         'USER': 'moringa',
 #         'PASSWORD': '1234',
 #     }
-}
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
