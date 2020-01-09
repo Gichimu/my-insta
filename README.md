@@ -49,7 +49,7 @@ To run the application on a local server, the user needs to install the followin
  Incase of any bugs encountered contact [gichimueric12@gmail.com]
 
 ## Website live link
-[Personal Gallery](https://my-pics-gallery.herokuapp.com/)
+[Personal Gallery](https://my-instaclone.herokuapp.com/)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Gichimu/my-gallery/blob/master/LICENCE.md) for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Gichimu/my-insta/blob/master/LICENCE.md) for details
